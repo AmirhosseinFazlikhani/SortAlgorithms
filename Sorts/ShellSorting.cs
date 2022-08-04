@@ -2,7 +2,10 @@
 
 public static class ShellSorting
 {
-    public static T[] ShellSort<T>(this T[] array) where T : IComparable<T>
+    public static TSource[] ShellSort<TSource, TKey>(
+        this TSource[] array,
+        Func<TSource, TKey> key)
+        where TKey : IComparable<TKey>
     {
         var h = 1;
 
@@ -15,7 +18,7 @@ public static class ShellSorting
         {
             for (var i = h; i < array.Length; i++)
             {
-                for (var j = i; j >= h && array[j].CompareTo(array[j - h]) < 0; j -= h)
+                for (var j = i; j >= h && key(array[j]).CompareTo(key(array[j - h])) < 0; j -= h)
                 {
                     (array[j], array[j - h]) = (array[j - h], array[j]);
                 }

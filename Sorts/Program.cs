@@ -1,5 +1,4 @@
-﻿
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Sorts;
 
 var arrays = CreateArrays(4);
@@ -10,17 +9,17 @@ watch.Stop();
 Console.WriteLine($"Linq: {watch.Elapsed}");
 
 watch.Restart();
-_ = arrays[1].HeapSort();
+_ = arrays[1].HeapSort(i => i);
 watch.Stop();
 Console.WriteLine($"Heap: {watch.Elapsed}");
 
 watch.Restart();
-_ = arrays[2].ShellSort();
+_ = arrays[2].ShellSort(i => i);
 watch.Stop();
 Console.WriteLine($"Shell: {watch.Elapsed}");
 
 watch.Restart();
-_ = arrays[3].InsertionSort();
+_ = arrays[3].InsertionSort(i => i);
 watch.Stop();
 Console.WriteLine($"Insertion: {watch.Elapsed}");
 
