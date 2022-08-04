@@ -33,29 +33,30 @@ public static class HeapSorting
         }
     }
 
-    private static void MaxHeapify<TSource, TKey>(
-        TSource[] array,
-        Func<TSource, TKey> key,
-        int index,
-        int heapSize)
-        where TKey : IComparable<TKey>
+    private static void MaxHeapify<TSource, TKey>(TSource[] array, Func<TSource, TKey> key, int index, int heapSize) where TKey : IComparable<TKey>
     {
-        var leftIndex = index * 2 + 1;
-        var rightIndex = leftIndex + 1;
-
-        var largestIndex = leftIndex <= heapSize && key(array[leftIndex]).CompareTo(key(array[index])) > 0
-            ? leftIndex
-            : index;
-
-        if (rightIndex <= heapSize && key(array[rightIndex]).CompareTo(key(array[largestIndex])) > 0)
+        while (true)
         {
-            largestIndex = rightIndex;
-        }
+            var leftIndex = index * 2 + 1;
+            var rightIndex = leftIndex + 1;
 
-        if (largestIndex != index)
-        {
-            (array[largestIndex], array[index]) = (array[index], array[largestIndex]);
-            MaxHeapify(array, key, largestIndex, heapSize);
+            var largestIndex = leftIndex <= heapSize && key(array[leftIndex]).CompareTo(key(array[index])) > 0
+                ? leftIndex
+                : index;
+
+            if (rightIndex <= heapSize && key(array[rightIndex]).CompareTo(key(array[largestIndex])) > 0)
+            {
+                largestIndex = rightIndex;
+            }
+
+            if (largestIndex != index)
+            {
+                (array[largestIndex], array[index]) = (array[index], array[largestIndex]);
+                index = largestIndex;
+                continue;
+            }
+
+            break;
         }
     }
 }
