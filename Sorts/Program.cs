@@ -31,12 +31,7 @@ List<int[]> CreateArrays(int count)
     var baseArray = GetRandomArray(length);
 
     return Enumerable.Range(0, count)
-        .Select(_ =>
-        {
-            var array = new int[length];
-            Array.Copy(baseArray, array, length);
-            return array;
-        })
+        .Select(_ => (baseArray.Clone() as int[])!)
         .ToList();
 }
 
